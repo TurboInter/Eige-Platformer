@@ -115,19 +115,28 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    //FROM HERE: SOLUTION for scaling problem
+    private Vector3 beforeScale;
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("DynamicPlatform"))
+        if (other.transform.CompareTag("DynamicPlatform"))
         {
-            transform.parent = other.transform;
+            beforeScale = transform.localScale;
+            Debug.Log(transform.localScale);
+            transform.SetParent(other.transform);
+            transform.localScale = new Vector3(beforeScale.x / other.transform.localScale.x,
+                beforeScale.y / other.transform.localScale.y, beforeScale.z / other.transform.localScale.z);
+            Debug.Log(transform.localScale);
+            
         }
     }
 
     private void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.CompareTag("DynamicPlatform"))
+        if (other.transform.CompareTag("DynamicPlatform"))
         {
-            transform.parent = null;
+            transform.SetParent(null);
+            transform.localScale = beforeScale;
         }
     }
 }

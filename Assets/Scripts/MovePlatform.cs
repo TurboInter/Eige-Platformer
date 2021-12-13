@@ -42,4 +42,6 @@ public class MovePlatform : MonoBehaviour
         }
         direction = 0;
     }
+    
+    
 }
