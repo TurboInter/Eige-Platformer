@@ -9,4 +9,12 @@ public class SpawnPoint : MonoBehaviour
     {
         Gizmos.DrawIcon(transform.position, "spawnpoint");
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<PlayerBehaviour>().spawnpoint = transform;
+        }
+    }
 }

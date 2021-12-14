@@ -18,7 +18,6 @@ public class GameData
             {
                 instance = new GameData();
             }
-
             return instance;
         }
     }
@@ -26,18 +25,12 @@ public class GameData
     private int score = 0;
     public int Score
     {
-        get
-        {
-            return score;
-        }
-        set
-        {
-            score = value;
-        }
+        get => score; //Gleich wie {return score}
+        set => score = value; //=> entspricht der Einklammerung eines Statements
     }
     public int Lives
     {
-        get;
+        get; //Automatische Implementierung durch C#
         set;
     }
 }

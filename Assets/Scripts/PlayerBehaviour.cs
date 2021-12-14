@@ -127,7 +127,23 @@ public class PlayerBehaviour : MonoBehaviour
             transform.localScale = new Vector3(beforeScale.x / other.transform.localScale.x,
                 beforeScale.y / other.transform.localScale.y, beforeScale.z / other.transform.localScale.z);
             Debug.Log(transform.localScale);
-            
+        }
+        else if (other.gameObject.CompareTag("Enemy"))
+        {
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            Collider enemyCollider = other.gameObject.GetComponent<Collider>();
+            Collider playerCollider = gameObject.GetComponent<Collider>();
+            if (enemy.invincible == true) onDeath();
+            else if ((playerCollider.bounds.center.y - playerCollider.bounds.extents.y)
+                     > enemyCollider.bounds.center.y + 0.5 * enemyCollider.bounds.extents.y)
+            {
+                JumpOnEnemy(enemy.bumpSpeed);
+                enemy.onDeath();
+            }
+            else
+            {
+                onDeath();
+            }
         }
     }
 
@@ -139,4 +155,13 @@ public class PlayerBehaviour : MonoBehaviour
             transform.localScale = beforeScale;
         }
     }
+
+    void onDeath() => Spawn();
+
+    void JumpOnEnemy(float bumpSpeed)
+    {
+        GameData.Instance.Score += 10;
+        playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, bumpSpeed, playerRigidbody.velocity.z);
+    }
+    
 }
