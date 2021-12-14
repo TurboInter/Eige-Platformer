@@ -85,7 +85,6 @@ public class PlayerBehaviour : MonoBehaviour
         velocity.y = playerRigidbody.velocity.y;
         velocity.z = forwardInput * moveSettings.runVelocity; //Kein Deltatime, wegen fixed 50Fps der Physics engine
         
-        Debug.Log(velocity);
         playerRigidbody.velocity = transform.TransformDirection(velocity); //Transformiert den Vektor in den richtigen Space
     }
 
