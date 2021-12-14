@@ -11,17 +11,17 @@ public class MovePlatform : MonoBehaviour
     // Start is called before the first frame update
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         switch (direction)
         {
             case 0:
-                Vector3 distance = Vector3.right * speed * Time.deltaTime;
-                transform.Translate(distance, Space.World);
+                Vector3 distance = Vector3.right * speed;
+                transform.position += distance;
                 break;
             case 1:
-                distance = Vector3.left * speed * Time.deltaTime;
-                transform.Translate(distance, Space.World);
+                distance = Vector3.left * speed;
+                transform.position += distance;
                 break;
                 
         }

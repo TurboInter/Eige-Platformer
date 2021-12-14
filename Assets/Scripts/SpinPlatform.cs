@@ -7,9 +7,9 @@ public class SpinPlatform : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 5f;
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, rotationSpeed);
     }
     
 }

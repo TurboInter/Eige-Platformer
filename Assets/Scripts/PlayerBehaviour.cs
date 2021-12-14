@@ -85,7 +85,7 @@ public class PlayerBehaviour : MonoBehaviour
         velocity.y = playerRigidbody.velocity.y;
         velocity.z = forwardInput * moveSettings.runVelocity; //Kein Deltatime, wegen fixed 50Fps der Physics engine
         
-
+        Debug.Log(velocity);
         playerRigidbody.velocity = transform.TransformDirection(velocity); //Transformiert den Vektor in den richtigen Space
     }
 
@@ -121,12 +121,12 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (other.transform.CompareTag("DynamicPlatform"))
         {
-            beforeScale = transform.localScale;
-            Debug.Log(transform.localScale);
-            transform.SetParent(other.transform);
-            transform.localScale = new Vector3(beforeScale.x / other.transform.localScale.x,
-                beforeScale.y / other.transform.localScale.y, beforeScale.z / other.transform.localScale.z);
-            Debug.Log(transform.localScale);
+            //beforeScale = transform.localScale;
+            //Debug.Log(transform.localScale);
+            transform.SetParent(other.transform.parent);
+            //transform.localScale = new Vector3(beforeScale.x / other.transform.localScale.x,
+                //beforeScale.y / other.transform.localScale.y, beforeScale.z / other.transform.localScale.z);
+            //Debug.Log(transform.localScale);
         }
         else if (other.gameObject.CompareTag("Enemy"))
         {
@@ -152,7 +152,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (other.transform.CompareTag("DynamicPlatform"))
         {
             transform.SetParent(null);
-            transform.localScale = beforeScale;
+            //transform.localScale = beforeScale;
         }
     }
 
